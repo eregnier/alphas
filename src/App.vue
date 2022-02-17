@@ -24,7 +24,7 @@
       <div :style="styleWrapper" :class="{'clear': token === '\n', 'letter': token !== '\n'}" class="alpha-wrapper"
            v-for="(token, i) in text"
            :key="i">
-        <img :style="style" :src="`/alphas/sm-${token}.png`" v-if="isAlpha(token)"/>
+        <img :style="style" :src="`/alphas/sm-${token}.png`" v-if="isAlpha(token)" :alt="`lettre ${token}`"/>
         <span v-else>{{ token }}</span>
       </div>
     </div>
@@ -56,10 +56,10 @@ export default {
       this.height += 10;
     },
     isAlpha(value) {
-      return 'abcdefghijklmnopqrstuvwxyz'.includes(value.toLowerCase())
+      return 'abcdefghijklmnopqrstuvwxyz'.includes(value)
     },
     check() {
-      this.text = Array.from(this.text).filter(t =>
+      this.text = Array.from(this.text.toLowerCase()).filter(t =>
           this.isAlpha(t) || t === " " || t === "\n"
       ).join('')
     }
